@@ -1,24 +1,42 @@
-import "dotenv/config";
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import { API_URL, PORT } from "./config/app.config";
-import { DB_URL } from "./config/db.config";
-import router from "./routes";
-
-mongoose
-  .connect(DB_URL)
-  .then(() => console.log("[Database] Connection established."))
-  .catch((err) => console.log("[Database] Connection failed: ", err));
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const apiRouter = require("./routes/api");
 
 const app = express();
 
+// Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.use(API_URL, router);
+// Database connection setup
+const MONGODB_URI =
+  "mongodb+srv://bjanesummey:Component22@janedb-personal.qwv5xjz.mongodb.net/WanderLog?retryWrites=true&w=majority";
 
-app.listen(PORT, () =>
-  console.log(`[Server] Listening for requests at https://localhost:${PORT}`)
-);
+mongoose
+  .connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
+
+// API routes setup
+app.use("/api", apiRouter);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something went wrong!");
+});
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
