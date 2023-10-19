@@ -6,7 +6,7 @@ function LogList() {
   const [logs, setLogs] = useState([]);
 
   useEffect(() => {
-    // Fetch the list of travel logs from your backend when the component mounts
+    
     axios
       .get('http://localhost:5000/api/logs')
       .then(response => setLogs(response.data))

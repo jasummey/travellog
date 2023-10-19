@@ -7,7 +7,7 @@ function DeleteLog({ id, onDelete }) {
       axios
         .delete(`/api/logs/${id}`)
         .then(() => {
-          onDelete(); // Invoke the parent component's callback to refresh the log view
+          onDelete(); 
         })
         .catch(error => {
           console.error('Error deleting log:', error);

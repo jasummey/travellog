@@ -39,20 +39,18 @@ const createLog = async (req, res) => {
 // Update a travel log by ID
 const updateLog = async (req, res) => {
   const { id } = req.params;
-  const { title, description, location, date } = req.body;
+
   try {
-    const updatedLog = await Log.findByIdAndUpdate(id, {
-      title,
-      description,
-      location,
-      date,
-    });
+    const updatedLog = await Log.findByIdAndUpdate(id, req.body, { new: true });
+
     if (!updatedLog) {
-      return res.status(404).json({ error: "Log not found" });
+      return res.status(404).json({ message: "Log not found" });
     }
-    res.json(updatedLog);
+
+    res.status(200).json(updatedLog);
   } catch (error) {
-    res.status(400).json({ error: "Bad request" });
+    console.error("Error updating log:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 

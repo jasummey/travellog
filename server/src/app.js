@@ -6,11 +6,9 @@ const apiRouter = require("./routes/api");
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// Database connection setup
 const MONGODB_URI =
   "mongodb+srv://bjanesummey:Component22@janedb-personal.qwv5xjz.mongodb.net/WanderLog?retryWrites=true&w=majority";
 
@@ -26,10 +24,8 @@ mongoose
     console.error("Error connecting to MongoDB:", error);
   });
 
-// API routes setup
 app.use("/api", apiRouter);
 
-// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something went wrong!");
