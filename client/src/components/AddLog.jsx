@@ -19,9 +19,8 @@ function AddLog() {
     event.preventDefault();
     axios.post('/api/add-log', formData)
       .then(() => {
-        // Redirect to the list of logs after adding
-        // You should replace '/logs' with the actual path to your list of logs page
-        window.location.href = '/logs'; // Use window.location.href to navigate
+        
+        window.location.href = '/logs'; 
       })
       .catch(error => {
         console.error("Error adding log:", error);

@@ -3,20 +3,20 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import backgroundImage from '../assets/outdoorphoto.jpg'; 
 
-// Define a CSS class for the background image with brightness filter
+
 const backgroundStyle = {
   backgroundImage: `url(${backgroundImage})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  minHeight: '100vh', // Ensure the background covers the entire viewport height
-  filter: 'brightness(70%)', // Adjust the brightness percentage as needed
-  display: 'flex',  // Center the content horizontally and vertically
-  alignItems: 'center',  // Center vertically
-  justifyContent: 'center',  // Center horizontally
-  flexDirection: 'column',  // Stack the elements vertically
+  minHeight: '100vh', 
+  filter: 'brightness(70%)',
+  display: 'flex',  
+  alignItems: 'center', 
+  justifyContent: 'center', 
+  flexDirection: 'column', 
 };
 
-// Define a CSS class for the white text color
+
 const whiteText = {
   color: 'white',
 };

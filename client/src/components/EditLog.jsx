@@ -12,7 +12,7 @@ function EditLog() {
   });
 
   useEffect(() => {
-    // Fetch the individual travel log by ID from your backend when the component mounts
+    
     axios
       .get(`/api/logs/${id}`)
       .then(response => setLog(response.data))
@@ -27,11 +27,10 @@ function EditLog() {
   const handleSubmit = event => {
     event.preventDefault();
     axios
-      .put(`/api/logs/${id}`, log) // Send a PUT request to update the log
+      .put(`/api/logs/${id}`, log) 
       .then(() => {
-        // Redirect to the view log page after editing
-        // You should replace `/logs/${id}` with the actual path to your view log page
-        window.location.href = `/logs/${id}`; // Use window.location.href to navigate
+        
+        window.location.href = `/logs/${id}`;
       })
       .catch(error => {
         console.error('Error editing log:', error);
